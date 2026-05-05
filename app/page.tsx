@@ -3,6 +3,7 @@ import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db/client";
 import { items, sources } from "@/lib/db/schema";
 import { CATEGORIES, type Category } from "@/lib/sources";
+import { formatDate } from "@/lib/format-date";
 import { RefreshButton } from "./refresh-button";
 
 export const dynamic = "force-dynamic";
@@ -12,17 +13,6 @@ const LANG_LABELS: Record<string, string> = { en: "EN", fr: "FR", de: "DE", lb: 
 
 function isCategory(v: string | undefined): v is Category {
   return v === "news" || v === "business" || v === "government" || v === "events";
-}
-
-function formatDate(d: Date | null) {
-  if (!d) return "—";
-  return new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: "Europe/Luxembourg",
-  }).format(d);
 }
 
 async function getRows(category: Category) {

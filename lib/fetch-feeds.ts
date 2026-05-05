@@ -1,13 +1,10 @@
-import Parser from "rss-parser";
 import { eq, sql } from "drizzle-orm";
 import { db } from "./db/client";
 import { items, sources as sourcesTable } from "./db/schema";
 import { sources as registry, type SourceDef } from "./sources";
+import { makeParser, extractItem } from "./feed-parser";
 
-const parser = new Parser({
-  timeout: 10_000,
-  headers: { "User-Agent": "lux-rss/1.0 (+https://github.com/)" },
-});
+const parser = makeParser();
 
 type FetchResult = {
   source: string;
@@ -36,20 +33,12 @@ async function fetchSource(def: SourceDef): Promise<FetchResult> {
     const feed = await parser.parseURL(def.url);
     let inserted = 0;
     for (const entry of feed.items) {
-      const guid = entry.guid || entry.id || entry.link || entry.title;
-      if (!guid || !entry.link) continue;
+      const values = extractItem(entry, row.id, def.category);
+      if (!values) continue;
 
       const result = await db
         .insert(items)
-        .values({
-          sourceId: row.id,
-          guid: String(guid),
-          title: entry.title?.trim() || "(untitled)",
-          link: entry.link,
-          summary: (entry.contentSnippet || entry.content || entry.summary || null)?.toString().slice(0, 1000) ?? null,
-          publishedAt: entry.isoDate ? new Date(entry.isoDate) : entry.pubDate ? new Date(entry.pubDate) : null,
-          category: def.category,
-        })
+        .values(values)
         .onConflictDoNothing()
         .returning({ id: items.id });
 
