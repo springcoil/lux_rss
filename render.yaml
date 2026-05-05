@@ -1,6 +1,7 @@
 databases:
   - name: lux-rss-db
     plan: free
+    region: oregon
     databaseName: lux_rss
     user: lux_rss
 
