@@ -10,7 +10,7 @@ services:
     runtime: node
     plan: free
     region: frankfurt
-    buildCommand: npm install && npm run db:push && npm run build
+    buildCommand: npm install --include=dev && npm run db:push && npm run build
     startCommand: npm start
     envVars:
       - key: DATABASE_URL
@@ -28,7 +28,7 @@ services:
     plan: starter
     region: frankfurt
     schedule: "0 6 * * *"
-    buildCommand: npm install
+    buildCommand: npm install --include=dev
     startCommand: npx tsx scripts/fetch.ts
     envVars:
       - key: DATABASE_URL
