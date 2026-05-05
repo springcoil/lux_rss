@@ -3,6 +3,7 @@ import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/lib/db/client";
 import { items, sources } from "@/lib/db/schema";
 import { CATEGORIES, type Category } from "@/lib/sources";
+import { RefreshButton } from "./refresh-button";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -80,6 +81,7 @@ export default async function Page({
             {lastFetched ? " (Europe/Luxembourg)" : ""}
           </p>
         </div>
+        <RefreshButton />
       </header>
 
       <nav className="mb-6 flex flex-wrap gap-2 border-b border-zinc-200 dark:border-zinc-800 pb-3">
