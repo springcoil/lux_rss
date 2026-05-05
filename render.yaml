@@ -19,6 +19,8 @@ services:
           property: connectionString
       - key: NODE_ENV
         value: production
+      - key: NPM_CONFIG_PRODUCTION
+        value: "false"
       - key: REFRESH_TOKEN
         generateValue: true
 
@@ -35,3 +37,5 @@ services:
         fromDatabase:
           name: lux-rss-db
           property: connectionString
+      - key: NPM_CONFIG_PRODUCTION
+        value: "false"
