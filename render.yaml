@@ -9,7 +9,7 @@ services:
     name: lux-rss-web
     runtime: node
     plan: free
-    region: frankfurt
+    region: oregon
     buildCommand: npm install --include=dev && npm run db:push && npm run build
     startCommand: npm start
     envVars:
@@ -28,7 +28,7 @@ services:
     name: lux-rss-cron
     runtime: node
     plan: starter
-    region: frankfurt
+    region: oregon
     schedule: "0 6 * * *"
     buildCommand: npm install --include=dev
     startCommand: npx tsx scripts/fetch.ts
