@@ -29,4 +29,22 @@ export const sources: SourceDef[] = [
     category: "government",
     lang: "fr",
   },
+  {
+    name: "CSSF",
+    url: "https://www.cssf.lu/en/feed/publications",
+    category: "business",
+    lang: "en",
+  },
+  {
+    name: "Banque centrale du Luxembourg",
+    url: "https://www.bcl.lu/en/support/rss/00_rssfeed.rss",
+    category: "business",
+    lang: "en",
+  },
+  {
+    name: "Lëtzebuerger Gemengen",
+    url: "https://www.gemengen.lu/web/feed/",
+    category: "business",
+    lang: "fr",
+  },
 ];

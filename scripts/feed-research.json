@@ -1,0 +1,154 @@
+{
+  "outlets": [
+    {
+      "name": "Paperjam",
+      "category": "business",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": { "name": "CSSF", "url": "https://www.cssf.lu/en/feed/publications" },
+      "notes": "No public RSS. Tried /rss, /feed, /flux, /api/rss, /?feed=rss2 — all 404 or HTML. Site is Next.js."
+    },
+    {
+      "name": "Delano",
+      "category": "business",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Same Next.js stack as Paperjam (sister publication). /rss.xml redirects to luxembourgforfinance.com (DNS misconfig). No working feed."
+    },
+    {
+      "name": "Luxembourg for Finance",
+      "category": "business",
+      "status": "no-feed",
+      "url": "https://www.luxembourgforfinance.com/en/feed/",
+      "lang": "en",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "WordPress feed responds 200 with valid RSS structure but ZERO items. Drop per plan rule (≥1 item required)."
+    },
+    {
+      "name": "Chamber of Commerce",
+      "category": "business",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": { "name": "Lëtzebuerger Gemengen", "url": "https://www.gemengen.lu/web/feed/" },
+      "notes": "TYPO3 site, no RSS exposed. Newsletter only."
+    },
+    {
+      "name": "Luxinnovation",
+      "category": "business",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Kentico site, no RSS. /news/feed and /feed both return HTML."
+    },
+    {
+      "name": "CSSF (alternative)",
+      "category": "business",
+      "status": "verified",
+      "url": "https://www.cssf.lu/en/feed/publications",
+      "lang": "en",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Luxembourg financial regulator's main publications feed. 20 items confirmed."
+    },
+    {
+      "name": "BCL (alternative)",
+      "category": "business",
+      "status": "verified",
+      "url": "https://www.bcl.lu/en/support/rss/00_rssfeed.rss",
+      "lang": "en",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Banque centrale du Luxembourg press releases. 20 items confirmed."
+    },
+    {
+      "name": "Lëtzebuerger Gemengen (alternative)",
+      "category": "business",
+      "status": "verified",
+      "url": "https://www.gemengen.lu/web/feed/",
+      "lang": "fr",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Luxembourg communes/business magazine. 9 items, mixed FR/DE content (FR dominant)."
+    },
+    {
+      "name": "Visit Luxembourg",
+      "category": "events",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "No RSS — only newsletter signup."
+    },
+    {
+      "name": "Luxembourg City tourism (vdl.lu)",
+      "category": "events",
+      "status": "verified",
+      "url": "https://www.vdl.lu/en/agenda/rss.xml",
+      "lang": "fr",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Drupal AgendaRSS feed. 30 items. Channel xml:lang=fr; content predominantly French event titles."
+    },
+    {
+      "name": "Echo.lu",
+      "category": "events",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": { "name": "Kultur LX", "url": "https://www.kulturlx.lu/feed" },
+      "notes": "SPA — /feed and /rss both return the HTML shell."
+    },
+    {
+      "name": "Philharmonie",
+      "category": "events",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "No RSS at /feed, /rss.xml, /en/rss, /?format=feed. CMS doesn't expose syndication."
+    },
+    {
+      "name": "Mudam",
+      "category": "events",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "No RSS. Only newsletter."
+    },
+    {
+      "name": "agenda.lu",
+      "category": "events",
+      "status": "no-feed",
+      "url": null,
+      "lang": null,
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Domain not actually used as a public events platform. plurio.net (cross-border cultural agenda) timed out repeatedly."
+    },
+    {
+      "name": "Kultur LX (alternative)",
+      "category": "events",
+      "status": "verified",
+      "url": "https://www.kulturlx.lu/feed",
+      "lang": "fr",
+      "checkedAt": "2026-05-06T09:00:00Z",
+      "alternative": null,
+      "notes": "Cultural Promotion Agency of Luxembourg WordPress feed. 10 items, French."
+    }
+  ]
+}

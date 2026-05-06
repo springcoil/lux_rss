@@ -1,6 +1,34 @@
 import { describe, expect, it } from "vitest";
 import { extractItem, makeParser, parseFeedDate } from "../feed-parser";
-import { sources } from "../sources";
+import { CATEGORIES, sources, type Category } from "../sources";
+
+const VALID_CATEGORIES = new Set<Category>(CATEGORIES.map((c) => c.id));
+const VALID_LANGS = new Set(["en", "fr", "de", "lb"] as const);
+
+describe("sources.ts shape", () => {
+  it("every name is unique", () => {
+    const names = sources.map((s) => s.name);
+    expect(new Set(names).size).toBe(names.length);
+  });
+
+  it("every category is in CATEGORIES", () => {
+    for (const s of sources) {
+      expect(VALID_CATEGORIES.has(s.category)).toBe(true);
+    }
+  });
+
+  it("every lang is one of en|fr|de|lb", () => {
+    for (const s of sources) {
+      expect(VALID_LANGS.has(s.lang)).toBe(true);
+    }
+  });
+
+  it("every url parses as a valid URL", () => {
+    for (const s of sources) {
+      expect(() => new URL(s.url), `${s.name} (${s.url})`).not.toThrow();
+    }
+  });
+});
 
 describe("extractItem (offline)", () => {
   it("maps an entry with isoDate to a valid publishedAt", () => {
@@ -211,7 +239,7 @@ describe.skipIf(!RUN_LIVE)("live RSS feeds (RUN_LIVE_FEEDS=1)", () => {
 
   for (const source of sources) {
     it(
-      `${source.name} — no RangeError from date handling, dates are valid-or-null`,
+      `${source.name} — returns ≥1 parseable item with safe date handling`,
       async () => {
         let feed;
         try {
@@ -222,17 +250,22 @@ describe.skipIf(!RUN_LIVE)("live RSS feeds (RUN_LIVE_FEEDS=1)", () => {
           return;
         }
 
-        if (feed.items.length === 0) {
-          console.warn(`[upstream] ${source.name}: empty feed`);
-          return;
-        }
+        expect(
+          feed.items.length,
+          `${source.name} returned an empty feed — drop it from sources.ts`
+        ).toBeGreaterThan(0);
 
+        let parseableItems = 0;
         let totalDates = 0;
         let nullDates = 0;
         for (const entry of feed.items) {
           expect(() => parseFeedDate(entry.isoDate)).not.toThrow();
           expect(() => parseFeedDate(entry.pubDate)).not.toThrow();
           expect(() => extractItem(entry, 1, source.category)).not.toThrow();
+
+          if (extractItem(entry, 1, source.category) !== null) {
+            parseableItems++;
+          }
 
           const published = parseFeedDate(entry.isoDate) ?? parseFeedDate(entry.pubDate);
           if (published === null) {
@@ -242,6 +275,11 @@ describe.skipIf(!RUN_LIVE)("live RSS feeds (RUN_LIVE_FEEDS=1)", () => {
           }
           totalDates++;
         }
+
+        expect(
+          parseableItems,
+          `${source.name} returned ${feed.items.length} items but none extract — drop or fix mapping`
+        ).toBeGreaterThan(0);
 
         if (totalDates > 0 && nullDates === totalDates) {
           console.warn(
