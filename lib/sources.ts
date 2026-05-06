@@ -47,4 +47,16 @@ export const sources: SourceDef[] = [
     category: "business",
     lang: "fr",
   },
+  {
+    name: "Ville de Luxembourg — Agenda",
+    url: "https://www.vdl.lu/en/agenda/rss.xml",
+    category: "events",
+    lang: "fr",
+  },
+  {
+    name: "Kultur LX",
+    url: "https://www.kulturlx.lu/feed",
+    category: "events",
+    lang: "fr",
+  },
 ];
