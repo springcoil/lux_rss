@@ -1,4 +1,4 @@
-import { eq, sql } from "drizzle-orm";
+import { eq, notInArray, sql } from "drizzle-orm";
 import { db } from "./db/client";
 import { items, sources as sourcesTable } from "./db/schema";
 import { sources as registry, type SourceDef } from "./sources";
@@ -23,6 +23,8 @@ async function ensureSources() {
         set: { url: s.url, category: s.category, lang: s.lang },
       });
   }
+  const names = registry.map((s) => s.name);
+  await db.delete(sourcesTable).where(notInArray(sourcesTable.name, names));
 }
 
 async function fetchSource(def: SourceDef): Promise<FetchResult> {
