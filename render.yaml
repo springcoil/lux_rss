@@ -30,7 +30,7 @@ services:
     runtime: node
     plan: starter
     region: oregon
-    schedule: "0 6 * * *"
+    schedule: "0 */2 * * *"
     buildCommand: npm install --include=dev
     startCommand: npx tsx scripts/fetch.ts
     envVars:
